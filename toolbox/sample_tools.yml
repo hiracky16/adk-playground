@@ -1,0 +1,39 @@
+sources:
+  my-bigquery-source:
+    kind: bigquery
+    project: ${your_project}
+    location: asia-northeast1
+toolsets:
+  my-toolset:
+    - search-hotels-by-name
+    - search-hotels-by-location
+    - book-hotel
+tools:
+  search-hotels-by-name:
+    kind: bigquery-sql
+    source: my-bigquery-source
+    description: Search for hotels based on name.
+    parameters:
+      - name: name
+        type: string
+        description: The name of the hotel.
+    statement: SELECT * FROM `${your_dataset}.hotels` WHERE LOWER(name) LIKE LOWER(CONCAT('%', @name, '%'));
+  search-hotels-by-location:
+    kind: bigquery-sql
+    source: my-bigquery-source
+    description: Search for hotels based on location.
+    parameters:
+      - name: location
+        type: string
+        description: The location of the hotel.
+    statement: SELECT * FROM `${your_dataset}.hotels` WHERE LOWER(location) LIKE LOWER(CONCAT('%', @location, '%'));
+  book-hotel:
+    kind: bigquery-sql
+    source: my-bigquery-source
+    description: >-
+      Book a hotel by its ID. If the hotel is successfully booked, returns a NULL, raises an error if not.
+    parameters:
+      - name: hotel_id
+        type: integer
+        description: The ID of the hotel to book.
+    statement: UPDATE `${your_dataset}.hotels` SET booked = TRUE WHERE id = @hotel_id;
