@@ -40,6 +40,6 @@
       ]
     }
   ],
-  "url": "http://travel_remote_agent:8001/a2a/hotel_agent",
+  "url": "http://localhost:8001/a2a/hotel_agent",
   "version": "1.0.0"
 }
