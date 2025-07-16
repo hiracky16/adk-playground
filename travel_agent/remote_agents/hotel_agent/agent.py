@@ -1,11 +1,11 @@
 import os
 from google.adk.agents import Agent
-from google.adk.tools.toolbox_tool import ToolboxTool
+from toolbox_core import ToolboxSyncClient
 
 TOOLBOX_URL = os.getenv('TOOLBOX_URL', 'http://localhost:5001')
-toolbox = ToolboxTool(TOOLBOX_URL)
+toolbox = ToolboxSyncClient(TOOLBOX_URL)
 
-tools = toolbox.get_toolset(toolset_name='my-toolset')
+tools = toolbox.load_toolset('my-toolset')
 
 prompt = """
   You're a helpful hotel assistant. You handle hotel searching, booking and
