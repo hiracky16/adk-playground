@@ -1,0 +1,4 @@
+google-adk==1.6.1
+a2a-sdk
+toolbox-langchain
+langchain

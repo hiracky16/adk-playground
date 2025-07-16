@@ -1,0 +1,45 @@
+{
+  "capabilities": {},
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json"
+  ],
+  "description": "A helpful AI assistant that can search and book hotels.",
+  "name": "hotel_agent",
+  "skills": [
+    {
+      "id": "search-hotels-by-name",
+      "name": "search-hotels-by-name",
+      "description": "Search for hotels based on name.",
+      "tags": [
+        "search",
+        "hotels",
+        "name"
+      ]
+    },
+    {
+      "id": "search-hotels-by-location",
+      "name": "search-hotels-by-location",
+      "description": "Search for hotels based on location.",
+      "tags": [
+        "search",
+        "hotels",
+        "location"
+      ]
+    },
+    {
+      "id": "search-hotels-by-everything",
+      "name": "search-hotels-by-everything",
+      "description": "Search for hotels based on name or location or price_tier.",
+      "tags": [
+        "search",
+        "hotels",
+        "everything"
+      ]
+    }
+  ],
+  "url": "http://travel_remote_agent:8001/a2a/hotel_agent",
+  "version": "1.0.0"
+}

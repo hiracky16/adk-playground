@@ -1,0 +1,25 @@
+{
+  "capabilities": {},
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json"
+  ],
+  "description": "A helpful AI assistant that can plan your travel by searching the internet for information.",
+  "name": "plan_agent",
+  "skills": [
+    {
+      "id": "google-search",
+      "name": "google-search",
+      "description": "Search the internet for information.",
+      "tags": [
+        "search",
+        "internet",
+        "google"
+      ]
+    }
+  ],
+  "url": "http://travel_remote_agent:8001/a2a/plan_agent",
+  "version": "1.0.0"
+}

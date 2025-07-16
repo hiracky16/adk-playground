@@ -1,5 +1,5 @@
 services:
-  toolbox:
+  hotel_agent_toolbox:
     image:  us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox:latest
     hostname: toolbox
     platform: linux/amd64
@@ -9,23 +9,40 @@ services:
       - CLOUDSDK_CONFIG=/.gcp/config
       - GOOGLE_APPLICATION_CREDENTIALS=/.gcp/config/application_default_credentials.json
     volumes:
-      - ./toolbox:/config
+      - ./travel_agent/remote_agents/hotel_agent/toolbox:/config
       - $HOME/.config/gcloud:/.gcp/config
     command: [ "toolbox", "--tools-file", "/config/tools.yml", "--address", "0.0.0.0", "--port", "5001" ]
     networks:
       - tool-network
-  hotet_agent:
+  travel_remote_agent:
+    depends_on:
+      - hotel_agent_toolbox
+    hostname: travel_remote_agent
     build:
-      context: ./hotel_agent
+      context: ./travel_agent
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - "8001:8001"
+    environment:
+      - TOOLBOX_URL=http://toolbox:5001
+    entrypoint: ["adk", "api_server", "--a2a", "--host", "0.0.0.0", "--port", "8001", "/app/remote_agents"]
+    networks:
+      - tool-network
+  travel_agent:
+    depends_on:
+      - travel_remote_agent
+      - hotel_agent_toolbox
+    build:
+      context: .
       dockerfile: Dockerfile
     env_file: .env
     environment:
-      - TOOLBOX_URL=http://toolbox:5001
+      - REMOTE_AGENT_URL=http://travel_remote_agent:8001
+    entrypoint: ["adk", "web", "--host", "0.0.0.0"]
     ports:
       - "8000:8000"
-    entrypoint: ["adk", "web"]
     networks:
       - tool-network
-    image: hotel-agent
 networks:
   tool-network:

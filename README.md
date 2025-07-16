@@ -17,7 +17,7 @@
 ## 技術スタック
 
 - **AIモデル**: Gemini 2.0 Flash
-- **フレームワーク**: Google ADK (AI Development Kit)
+- **フレームワーク**: Google ADK (Agent Development Kit)
 - **データベース**: BigQuery
 - **コンテナ環境**: Docker & Docker Compose
 
