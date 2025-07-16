@@ -15,7 +15,7 @@ services:
       context: ./travel_agent
       dockerfile: Dockerfile
     env_file: .env
-    entrypoint: ["adk", "api_server", "--a2a", "--host", "0.0.0.0", "--allow_origins", "http://localhost:8000", "--port", "8001", "/app/remote_agents"]
+    entrypoint: ["adk", "api_server", "--a2a", "--host", "0.0.0.0", "--port", "8001", "/app/remote_agents"]
     network_mode: service:travel_agent
   travel_agent:
     hostname: travel_agent
